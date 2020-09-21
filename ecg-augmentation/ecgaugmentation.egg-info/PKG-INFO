@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ecgaugmentation
-Version: 0.0.1
+Version: 0.0.2
 Summary: ECG augmentation 
 Home-page: https://github.com/jackwboynton/timeseries_resnet/ecg-augmentation
 Author: Jack Boynton

@@ -1,0 +1,5 @@
+numpy==1.19.0
+scipy==1.4.1
+matplotlib==3.2.2
+tqdm==4.44.1
+parmap==1.5.1

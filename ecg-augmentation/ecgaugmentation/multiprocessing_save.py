@@ -4,10 +4,11 @@ from multiprocessing import Pool
 import sys
 import random as rd
 from tqdm import tqdm
-import argparse
 import parmap
 global counter
 counter = 0
+global BLOCKSIZE
+BLOCKSIZE = 1024
 
 def run(ind,a, ANOMALY, x, blocksize, ret=False):
     out,did,hh,_,_ = a.augment_random(ANOMALY[0])
@@ -82,25 +83,8 @@ def main(PLT_CHANNELS,ITERATIONS, a,ANOMALY, del_same=False, blocksize=None, ret
             else:
                 np.save(f'{ANOMALY[2]}/{ANOMALY[0]}_ann.npy', out_ann)
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--inPath", type=str, help="path to -fecg and -ann npy files")
-    parser.add_argument("-o", "--outPath", type=str, help="path to save generated anomaly segments and annotations")
-    parser.add_argument("-t", "--anomaly", type=str, help="anomaly type")
-    parser.add_argument("-n", "--iterations", type=int, help="number of segments to generate")
-    parser.add_argument("-b", "--blockSize", type=int, help="optional, how often to save anomaly file")
-    args = parser.parse_args()
-    PLT_CHANNELS = list(range(12))
-    a = Augment(use_path=True, path=args.inPath,anomaly_type=args.anomaly)
-    ANOMALY = (args.anomaly, "", args.outPath) # ANOMALY type, "", out path
-    ITERATIONS = args.iterations
-    try:
-        BLOCKSIZE = args.blockSize
-    except:
-        BLOCKSIZE = None
-    main(PLT_CHANNELS, ITERATIONS, a, ANOMALY, blocksize=BLOCKSIZE)
-
 def augment(in_path: str, anomaly_type: str, iterations: int, block_size: int=1024) -> (np.ndarray, np.ndarray):
+    global BLOCKSIZE
     PLT_CHANNELS = list(range(12))
     a = Augment(use_path=True, path=in_path,anomaly_type=anomaly_type)
     ANOMALY = (anomaly_type, "", ".") # ANOMALY type, "", out path
