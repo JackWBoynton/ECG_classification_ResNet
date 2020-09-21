@@ -1,4 +1,3 @@
-#!/Library/Frameworks/Python.framework/Versions/3.8/bin/python3
 from scipy import signal
 from scipy import stats
 import numpy as np

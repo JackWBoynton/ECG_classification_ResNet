@@ -9,46 +9,61 @@ import parmap
 global counter
 counter = 0
 
-def run(ind,a, ANOMALY, x, blocksize):
+def run(ind,a, ANOMALY, x, blocksize, ret=False):
     out,did,hh,_,_ = a.augment_random(ANOMALY[0])
-    np.save(f"{ANOMALY[2]}/{ANOMALY[0]}_{ind+(x*blocksize)}.npy", out)
+    if not ret:
+        np.save(f"{ANOMALY[2]}/{ANOMALY[0]}_{ind+(x*blocksize)}.npy", out) # only save if not return
     return out
 
 
-def main(PLT_CHANNELS,ITERATIONS, a,ANOMALY, del_same=False, blocksize=None):
+def main(PLT_CHANNELS,ITERATIONS, a,ANOMALY, del_same=False, blocksize=None, ret=False):
     global BLOCKSIZE
+    retu, retu_ann = [], []
     BLOCKSIZE = blocksize
     if blocksize is not None:
         full = ITERATIONS//blocksize
         for x in tqdm(range(full)):
             with Pool(8) as pool:
                 iterable = zip(range(blocksize),[a for _ in list(range(blocksize))], [ANOMALY for _ in range(blocksize)])
-                d = np.array(parmap.starmap(run,list(iterable),x, blocksize, pm_pbar=False))
+                d = np.array(parmap.starmap(run,list(iterable),x, blocksize,ret, pm_pbar=False))
+                if ret:
+                    retu.append(d)
                 defs = list(np.load("definitions.npy", allow_pickle=True))
                 for x in range(len(defs)):
                     if defs[x][0] == ANOMALY[0]:
                         out_ann_ = int(defs[x][1])
-                try:
-                    #print(have.shape, np.array(d).shape)
-                    have_anns = np.load(f"{ANOMALY[2]}/{ANOMALY[0]}_ann.npy")
-                    out_ann = np.concatenate((have_anns, [[out_ann_] for _ in range(len(d))]))
-                except Exception as e:
-                    out_ann = np.array([[out_ann_] for _ in range(len(d))])
-                    np.save(f'{ANOMALY[2]}/{ANOMALY[0]}_ann.npy', np.array(out_ann))
+                if not ret:
+                    try:
+                        #print(have.shape, np.array(d).shape)
+                        have_anns = np.load(f"{ANOMALY[2]}/{ANOMALY[0]}_ann.npy")
+                        out_ann = np.concatenate((have_anns, [[out_ann_] for _ in range(len(d))]))
+                    except Exception as e:
+                        out_ann = np.array([[out_ann_] for _ in range(len(d))])
+                        np.save(f'{ANOMALY[2]}/{ANOMALY[0]}_ann.npy', np.array(out_ann))
+                    else:
+                        np.save(f'{ANOMALY[2]}/{ANOMALY[0]}_ann.npy', out_ann)
                 else:
-                    np.save(f'{ANOMALY[2]}/{ANOMALY[0]}_ann.npy', out_ann)
+                    retu_ann.append([out_ann_] for _ in range(len(d)))
+
         leftover = ITERATIONS % blocksize
         if leftover != 0:
             with Pool(8) as pool:
                     iterable = zip(range(leftover),[a for _ in list(range(leftover))], [ANOMALY for _ in range(leftover)])
-                    d = parmap.starmap(run,list(iterable),full,blocksize,pm_pbar=True)
+                    d = parmap.starmap(run,list(iterable),full,blocksize,ret,pm_pbar=True)
+                    if ret:
+                        retu.append(d)
                     defs = list(np.load("definitions.npy", allow_pickle=True))
                     for x in range(len(defs)):
                         if defs[x][0] == ANOMALY[0]:
                             out_ann_ = int(defs[x][1])
-                    have_anns = np.load(f"{ANOMALY[2]}/{ANOMALY[0]}_ann.npy")
-                    out_ann = np.concatenate((have_anns, np.array([[out_ann_] for _ in range(len(d))])))
-                    np.save(f'{ANOMALY[2]}/{ANOMALY[0]}_ann.npy', out_ann)
+                    if not ret:
+                        have_anns = np.load(f"{ANOMALY[2]}/{ANOMALY[0]}_ann.npy")
+                        out_ann = np.concatenate((have_anns, np.array([[out_ann_] for _ in range(len(d))])))
+                        np.save(f'{ANOMALY[2]}/{ANOMALY[0]}_ann.npy', out_ann)
+                    else:
+                        retu_ann.append([out_ann_] for _ in range(len(d))) 
+        return retu, retu_ann
+                    
     else:
         with Pool(8) as pool:
             iterable = zip(range(ITERATIONS),[a for _ in list(range(ITERATIONS))], [ANOMALY for _ in range(ITERATIONS)])
@@ -84,3 +99,15 @@ if __name__ == "__main__":
     except:
         BLOCKSIZE = None
     main(PLT_CHANNELS, ITERATIONS, a, ANOMALY, blocksize=BLOCKSIZE)
+
+def augment(in_path: str, anomaly_type: str, iterations: int, block_size: int=1024) -> (np.ndarray, np.ndarray):
+    PLT_CHANNELS = list(range(12))
+    a = Augment(use_path=True, path=in_path,anomaly_type=anomaly_type)
+    ANOMALY = (anomaly_type, "", ".") # ANOMALY type, "", out path
+    ITERATIONS = iterations
+    try:
+        BLOCKSIZE = block_size
+    except:
+        BLOCKSIZE = None
+    ecg, ann = main(PLT_CHANNELS, ITERATIONS, a, ANOMALY, blocksize=BLOCKSIZE, ret=True)
+    return np.array(ecg), np.array(ann)
