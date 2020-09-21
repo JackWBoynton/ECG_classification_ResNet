@@ -1,0 +1,7 @@
+README.md
+setup.py
+ecgaugmentation.egg-info/PKG-INFO
+ecgaugmentation.egg-info/SOURCES.txt
+ecgaugmentation.egg-info/dependency_links.txt
+ecgaugmentation.egg-info/requires.txt
+ecgaugmentation.egg-info/top_level.txt
