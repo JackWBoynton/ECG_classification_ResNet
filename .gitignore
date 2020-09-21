@@ -1,2 +1,4 @@
 
 .DS_Store
+ecg-augmentation/dist/*
+ecg-augmentation/*.egg-info
