@@ -39,7 +39,6 @@ def main(training: str, validation: str, splits: int = 10):
     y_tmp = np.array(g["REALS_ann"])
 
     val_dataset_x, val_dataset_y = x_tmp, enc.fit_transform(y_tmp.reshape(-1,1)).toarray()
-    val_dataset_x, val_dataset_y = None, None
 
     x = g['REALS']
     y = g['REALS_ann']
@@ -48,8 +47,11 @@ def main(training: str, validation: str, splits: int = 10):
         # have multiple dfs in h5 file -> need to combine
         X, Y = combine(f)
     else:
-        print(f.keys())
         X, Y = f["X"], f["Y"]
+
+    # REMOVE UNKNOWN CLASS
+    X = X[(Y != 13).flatten()]
+    Y = Y[(Y != 13).flatten()]
 
     # split into k folds
     kfold = StratifiedKFold(n_splits=splits, shuffle=True)
@@ -59,7 +61,7 @@ def main(training: str, validation: str, splits: int = 10):
     hists = []
     for train_index, test_index in kfold.split(X, Y):
         # model
-        model, callbacks = resnet(f"raw_training_{counter}.log", classes=9, init_lr=0.1, tensorboard_dir="logs/")
+        model, callbacks = resnet(f"raw_training_{counter}.log", classes=8, init_lr=0.1, tensorboard_dir="logs/")
         # split
         X_train, X_test = X[train_index], X[test_index]
         y_train, y_test = Y[train_index], Y[test_index]
@@ -72,10 +74,14 @@ def main(training: str, validation: str, splits: int = 10):
         counter += 1
         hists.append(hist)
 
-    print(hists)
+    ## TEST DATA
+    model = resnet(f"raw_training_final.log", classes=8, init_lr=0.1, tensorboard_dir="logs/")
+    preds = model.predict(val_dataset_x)
+
     model.save("final_fold_model.hdf5")
-    y = enc.transform(np.array(y)).toarray()
-    print(x.shape, y.shape)
+
+
+    """y = enc.transform(np.array(y)).toarray()
     x_train,x_test,y_train,y_test = sklearn.model_selection.train_test_split(np.array(x),np.array(y),test_size=0.2)
 
     # save the split
@@ -86,10 +92,10 @@ def main(training: str, validation: str, splits: int = 10):
 
     model, callbacks = resnet(f"raw_training.log", classes=9, init_lr=0.1, tensorboard_dir="logs/")
 
-    """y_test = enc.transform(y_test).toarray()
-    y_train = enc.transform(y_train).toarray()"""
+    y_test = enc.transform(y_test).toarray()
+    y_train = enc.transform(y_train).toarray()
 
-    hist = model.fit(x=x_train, y=y_train, validation_data=(x_test, y_test), callbacks=callbacks,shuffle=True, batch_size=256, epochs=150)
+    hist = model.fit(x=x_train, y=y_train, validation_data=(x_test, y_test), callbacks=callbacks,shuffle=True, batch_size=256, epochs=150)"""
 
     
 
@@ -150,8 +156,6 @@ def resnet(training_log_path: str, classes: int, init_lr: float, tensorboard_dir
         keras.metrics.Recall(name='recall'),
         keras.metrics.AUC(name='auc')
     ]
-
-
 
     input_layer = keras.layers.Input((339,12),dtype='float32')
 
