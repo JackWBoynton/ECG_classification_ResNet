@@ -5,6 +5,7 @@ ECG Augmentation is a Python library for augmenting 12-lead ECG signals.
     <a href="https://github.com/badges/shields/graphs/contributors" alt="Contributors">
     <img src="https://img.shields.io/pypi/dw/ecgaugmentation" /></a>
 </p>
+
 ## Installation
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install ECG Augmentation.
