@@ -7,9 +7,10 @@ Thus far, the following materials have been uploaded.
 2. Full 12 lead ECG segments of an RBBB beat randomly altered during ECG data augmentation. [Here](supplemental_plots/Figure3)
 3. Test results in the four augmentation scenarios (EXP 1 - 4). [Here](test_results.md)
 4. Detailed_results.xlsx: details of the training accuracy and test accuracy in ECG segment classification. [Here](result_details.xlsx)
-5. ECG filtering and segmentation codes: ** Edmund will add a link here. ***
-6. ECG augmentation code: [README](augmentation/README.md)
+5. ECG filtering code: ** Edmund will add a link here. ***
+6. ECG segmentation code: ** Edmund will add a link here. ***
+7. ECG augmentation code: [README](augmentation/README.md)
   ![AugTest](imgs/rbbb.png)
-7. Model code: [resnet.py](resnet/resnet.py)
+8. Model code: [resnet.py](resnet/resnet.py)
   ![ResNetArch](imgs/resnet.png)
-8. Class activation mapping code: [Here](class_activation_map/cam.py)
+9. Class activation mapping code: [Here](class_activation_map/cam.py)
