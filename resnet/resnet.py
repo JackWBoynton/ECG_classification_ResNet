@@ -49,9 +49,9 @@ def main(training: str, validation: str, splits: int = 10):
     else:
         X, Y = f["X"], f["Y"]
 
-    # REMOVE UNKNOWN CLASS
-    X = X[(Y != 13).flatten()]
-    Y = Y[(Y != 13).flatten()]
+    # REMOVE UNKNOWN CLASS ?
+    # X = X[(Y != 13).flatten()]
+    # Y = Y[(Y != 13).flatten()]
 
     # split into k folds
     kfold = StratifiedKFold(n_splits=splits, shuffle=True)
@@ -81,6 +81,7 @@ def main(training: str, validation: str, splits: int = 10):
     model.save("final_fold_model.hdf5")
 
 
+    # WITHOUT KFOLD
     """y = enc.transform(np.array(y)).toarray()
     x_train,x_test,y_train,y_test = sklearn.model_selection.train_test_split(np.array(x),np.array(y),test_size=0.2)
 
@@ -201,7 +202,7 @@ def resnet(training_log_path: str, classes: int, init_lr: float, tensorboard_dir
 
     output_layer = keras.layers.Dense(classes, activation='softmax')(gap_layer)
     model = keras.models.Model(inputs=input_layer, outputs=output_layer)
-
+	
     def my_sparse_categorical_crossentropy(y_true, y_pred): # need from logits TRUE override default
         return K.categorical_crossentropy(y_true, y_pred, from_logits=False)
 
