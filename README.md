@@ -10,7 +10,9 @@ Thus far, the following materials have been uploaded.
 5. ECG filtering code: ** Edmund will add a link here. ***
 6. ECG segmentation code: ** Edmund will add a link here. ***
 7. ECG augmentation: [README](augmentation/README.md).
+ Sample segment:
   ![AugTest](imgs/rbbb.png)
 8. Model code ([link](resnet/resnet.py)).
+ResNet architecture:
   ![ResNetArch](imgs/resnet.png)
 9. Class activation mapping code ([link](class_activation_map/cam.py)).
