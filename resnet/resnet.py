@@ -43,20 +43,12 @@ def main(training: str, validation: str, splits: int = 10):
     x = g['REALS']
     y = g['REALS_ann']
 
-    if len(f.keys()) > 2:
-        # have multiple dfs in h5 file -> need to combine
-        X, Y = combine(f)
-    else:
-        X, Y = f["X"], f["Y"]
-
-    # REMOVE UNKNOWN CLASS ?
-    # X = X[(Y != 13).flatten()]
-    # Y = Y[(Y != 13).flatten()]
+    X, Y = f["X"], f["Y"]
 
     # split into k folds
     kfold = StratifiedKFold(n_splits=splits, shuffle=True)
 
-    # train
+    # TRAIN
     counter = 0
     hists = []
     for train_index, test_index in kfold.split(X, Y):
