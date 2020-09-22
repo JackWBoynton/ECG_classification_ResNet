@@ -7,7 +7,7 @@ Thus far, the following materials have been uploaded.
 2. Full 12 lead ECG segments of an RBBB beat randomly altered during ECG data augmentation ([link](supplemental_plots/Figure3)).
 3. Test results in the four augmentation scenarios (EXP 1 - 4) ([link](test_results.md)).
 4. Detailed_results.xlsx: details of the training accuracy and test accuracy in ECG segment classification ([link](result_details.xlsx)).
-5. ECG filtering and segmentation ([link](preproc)).
+5. ECG filtering and segmentation ([README](preproc)).
 6. ECG augmentation: [README](augmentation/README.md).<br/>
    Sample segment:<br/>
   ![AugTest](imgs/rbbb.png)
