@@ -7,7 +7,7 @@ Thus far, the following materials have been uploaded.
 3. Detailed_results.xlsx: details of the training accuracy and test accuracy in ECG segment classification.
 4. ECG augmentation code: [README](ecg-augmentation/README.md)
   ![AugTest](imgs/rbbb.png)
-5. Model Code: [resnet.py](resnet/resnet.py)
+5. Model code: [resnet.py](resnet/resnet.py)
   ![ResNetArch](imgs/resnet.png)
 
 TODO:
