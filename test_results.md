@@ -27,6 +27,8 @@
 | SVESC   | 4     | 30923  | 16    | 0     | 4       | 1.00        | 1.00        | 1.00              |0.33|  0.20     |          |
 |  Total  |       |        |       |       | 30943   |             |             |                   |    |           |   0.8    |
 
+ Class balanced accuracy = 1.00; Macro F1 = 0.85
+
 
 | EXP 3   | TP    | TN     | FP    | FN    | Support | Sensitivity | Specificity | Balanced Accuracy | F1   | Precision |  | Macro F1 |
 |---------|-------|--------|-------|-------|---------|------|------|--------------|------|-----------|--|----------|
@@ -41,6 +43,7 @@
 | SVESC   | 4549  | 206496 | 0     | 21263 | 25812   | 0.18 | 1.00 | 0.59         | 0.30 | 1.00      |  |          |
 |   Total |       |        |       |       | 232308  |      |      |              |      |           |  |          |
 
+ Class balanced accuracy = 0.66; Macro F1 = 0.66
 
 | EXP 4   | TP    | TN     | FP    | FN    | Support | Sensitivity | Specificity | Balanced Accuracy | F1   | Precision |  | Macro F1 |
 |---------|-------|--------|-------|-------|---------|------|------|--------------|------|-----------|--|----------|
@@ -55,4 +58,6 @@
 | SVESC   | 0     | 30939  | 0     | 4     | 4       | 0.00 | 1.00 | 0.50         | 0.00 | N/A       |  |          |
 |   Total |       |        |       |       | 30943   |      |      |              |      |           |  |          |
 
+ Class balanced accuracy = 0.61; Macro F1 = 0.68
+ 
 (N/A means there is no true positive for the class and, therefore, the Precision is undefined.)
