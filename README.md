@@ -10,4 +10,4 @@ Thus far, the following materials have been uploaded.
   ![AugTest](imgs/rbbb.png)
 5. Model code: [resnet.py](resnet/resnet.py)
   ![ResNetArch](imgs/resnet.png)
-6. Class Activation Mapping Code: [Here](class_activation_map/cam.py)
+6. Class activation mapping code: [Here](class_activation_map/cam.py)
