@@ -52,3 +52,5 @@
 | UNKNOWN | 1     | 30939  | 0     | 3     | 4       | 0.25 | 1.00 | 0.63         | 0.40 | 1.00      |  |          |
 | SVESC   | 0     | 30939  | 0     | 4     | 4       | 0.00 | 1.00 | 0.50         | 0.00 | #DIV/0!   |  |          |
 |   Total |       |        |       |       | 30943   |      |      |              |      |           |  |          |
+
+(N/A means there is no true positive for the class and, therefore, the Precision is undefined.)
