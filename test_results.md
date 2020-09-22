@@ -13,7 +13,7 @@
 
  Class balanced accuracy = 1.00; Macro F1 = 1.00
 
-
+---
 
 | EXP 2   | TP    | TN     | FP    | FN    | Support | Sensitivity | Specificity | Balanced Accuracy | F1 | Precision | 
 |---------|-------|--------|-------|-------|---------|-------------|-------------|-------------------|----|-----------|
@@ -30,6 +30,7 @@
 
  Class balanced accuracy = 0.66; Macro F1 = 0.66
 
+---
 
 | EXP 3   | TP    | TN     | FP    | FN    | Support | Sensitivity | Specificity | Balanced Accuracy | F1   | Precision |
 |---------|-------|--------|-------|-------|---------|-------------|-------------|-------------------|------|-----------|
@@ -46,6 +47,7 @@
 
  Class balanced accuracy = 0.66; Macro F1 = 0.66
 
+---
 
 | EXP 4   | TP    | TN     | FP    | FN    | Support | Sensitivity | Specificity | Balanced Accuracy | F1   | Precision |
 |---------|-------|--------|-------|-------|---------|-------------|-------------|-------------------|------|-----------|
@@ -61,5 +63,7 @@
 |   Total |       |        |       |       | 30943   |      |      |              |      |           |          
 
 Class balanced accuracy = 0.61; Macro F1 = 0.68
+
+---
 
 (N/A means there is no true positive for the class and, therefore, the Precision is undefined.)
