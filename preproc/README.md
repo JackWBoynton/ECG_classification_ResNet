@@ -3,10 +3,9 @@
 ## Requirements
 Data files can be retrieved from [Physionet](https://doi.org/10.13026/C2V88N).
 
-Requires [WFDB](https://github.com/MIT-LCP/wfdb-python) for reading data files.
-
+Run the following command to install the required packages
 ```
-pip install wfdb
+pip install numpy scipy wfdb
 ```
 
 ## Usage
