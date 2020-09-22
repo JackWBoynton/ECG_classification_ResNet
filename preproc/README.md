@@ -4,10 +4,13 @@
 Data files can be retrieved from [Physionet](https://doi.org/10.13026/C2V88N).
 
 Requires [WFDB](https://github.com/MIT-LCP/wfdb-python) for reading data files.
-```pip install wfdb```
+
+```
+pip install wfdb
+```
 
 ## Usage
-
+The script can be used in a terminal.
 ```
 usage: preproc.py [-h] file ecg_output ann_output
 
@@ -21,4 +24,6 @@ optional arguments:
 ```
 
 ### Example
-```preproc.py I01 ecg.npy ann.npy```
+```
+python preproc.py I01 ecg.npy ann.npy
+```
