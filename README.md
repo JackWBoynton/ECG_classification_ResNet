@@ -9,10 +9,10 @@ Thus far, the following materials have been uploaded.
 4. Detailed_results.xlsx: details of the training accuracy and test accuracy in ECG segment classification ([link](result_details.xlsx)).
 5. ECG filtering code: ** Edmund will add a link here. ***
 6. ECG segmentation code: ** Edmund will add a link here. ***
-7. ECG augmentation: [README](augmentation/README.md).
- Sample segment:
+7. ECG augmentation: [README](augmentation/README.md).<br/>
+   Sample segment:<br/>
   ![AugTest](imgs/rbbb.png)
-8. Model code ([link](resnet/resnet.py)).
-ResNet architecture:
+8. ResNet model: code ([link](resnet/resnet.py)).<br/>
+   ResNet architecture:<br/>
   ![ResNetArch](imgs/resnet.png)
 9. Class activation mapping code ([link](class_activation_map/cam.py)).
