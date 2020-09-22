@@ -3,7 +3,7 @@
 
 This repository contains supplementary materials from a research project for classifying ECG beat segments into diagnostic classes defined by PhysioBank.
 Thus far, the following materials have been uploaded.
-1. Full 12 lead ECG segments of an RBBB beat from the original ECG data set. [Here](supplemental_plots/Figure2)
+1. Full 12 lead ECG segments of an RBBB beat from the original ECG data set ([link](supplemental_plots/Figure2)).
 2. Full 12 lead ECG segments of an RBBB beat randomly altered during ECG data augmentation. [Here](supplemental_plots/Figure3)
 3. Test results in the four augmentation scenarios (EXP 1 - 4). [Here](test_results.md)
 4. Detailed_results.xlsx: details of the training accuracy and test accuracy in ECG segment classification. [Here](result_details.xlsx)
