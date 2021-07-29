@@ -1,4 +1,12 @@
-
 .DS_Store
+
+*.swp
+*.swo
+
+__pycache__/
+
+data/
+out/
+
 ecg-augmentation/dist/*
 ecg-augmentation/*.egg-info
