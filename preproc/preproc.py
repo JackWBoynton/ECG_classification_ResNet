@@ -38,7 +38,7 @@ def filter_ecg(ecg, ssf=None, **kwargs):
 
     return fecg_data
 
-def segment(self, ecg, timestamps, fill=True):
+def segment(ecg, timestamps, fill=True):
     """
     Extract segments from the record given a list of segmentation
     timestamps.
@@ -77,7 +77,7 @@ def segment(self, ecg, timestamps, fill=True):
 
     return np_segs
 
-def timestamps(self, ecg, fs, rpeaks):
+def timestamps(ecg, fs, rpeaks):
     """
     Get time slices of heartbeats from a signal, given a list of R-peak
     locations. Adapted from biosppy.extract_heartbeats.
@@ -139,12 +139,12 @@ def main():
 
     annotations = wfdb.io.rdann(args.file, 'atr')
 
-    sgmter = AnnotationSegmenter()
     rpeaks = annotations.sample
+    corr_idx, seg_ts = timestamps(f_ecg, record.fs, rpeaks)
+    segs = segment(f_ecg, seg_ts)
 
-    corr_idx, seg_ts = sgmter.timestamps(f_ecg, record.fs, rpeaks)
+    assert segs.shape[0] == len(annotations.symbol)
 
-    segs = sgmter.segment(f_ecg, seg_ts)
     np.save(args.ecg_output, segs)
     np.save(args.ann_output, annotations.symbol)
 
