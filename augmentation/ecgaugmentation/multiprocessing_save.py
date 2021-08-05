@@ -5,6 +5,7 @@ import sys
 import random as rd
 from tqdm import tqdm
 import parmap
+import argparse
 global counter
 counter = 0
 global BLOCKSIZE
@@ -95,3 +96,19 @@ def augment(in_path: str, anomaly_type: str, iterations: int, block_size: int=10
         BLOCKSIZE = None
     ecg, ann = main(PLT_CHANNELS, ITERATIONS, a, ANOMALY, blocksize=BLOCKSIZE, ret=True)
     return np.array(ecg), np.array(ann)
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("input_path", type=str,
+                    help="the location of the input -fecg.npy files")
+    parser.add_argument("anomaly_type", type=str,
+                    help="anomaly type to augment ex. RBBB")
+    parser.add_argument("iterations", type=int,
+                    help="number of augmented samples to return")
+    parser.add_argument("out_path", type=str,
+                    help="location to save the output segments and annotations")
+
+    args = parser.parse_args()
+    augmented_segments, annotations = augment(args.input_path, args.anomaly_type, args.iterations)
+    np.save(args.out_path + "/augmented_segments_" + args.anomaly_type + ".npy", augmented_segments)
+    np.save(args.out_path + "/augmented_annotations_" + args.anomaly_type + ".npy", annotations)

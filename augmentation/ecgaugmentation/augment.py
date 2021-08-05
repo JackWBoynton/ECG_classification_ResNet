@@ -104,7 +104,8 @@ class Augment:
             #print(filename)
             tmp = np.load(filename)
             annotations = (np.load(filename.split("-")[0] + "-ann.npy"))
-            for n,i in enumerate(tmp):
+            print(tmp.shape, annotations.shape)
+            for n, i in enumerate(tmp):
                 if annotations[n] != 1 and self.annotation_mapping[annotations[n][0]][0] == anomaly_type:
                     data.append(i) # dont care about the index anymore just need raw data that is of type anomaly_type
         self.data_ = np.array(data)
@@ -344,7 +345,7 @@ class Augment:
                     try:
                         index = list(filter(lambda x: x[0] == channel, peak_))[0][1]
                     except:
-                        print('arb')
+                        #print('arb')
                         index = self.init_peaks_indices[channel][m]
                         factors_dict[(m,channel)] = round(rd.choice(np.arange(AUGMENT_MIN, AUGMENT_MAX, AUGMENT_STEP)),3) # choose arb factor
                         #factors_dict[(m,channel)] = round(AUGMENT_MAX,3)
